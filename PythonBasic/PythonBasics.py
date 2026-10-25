@@ -93,3 +93,5 @@ for i in range(len(name)//2):
         break
 else:
     print("It is a polyndrom")
+
+
