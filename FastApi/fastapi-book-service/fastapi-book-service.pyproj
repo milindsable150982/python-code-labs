@@ -12,7 +12,7 @@
     <Name>fastapi-book-service</Name>
     <RootNamespace>fastapi-book-service</RootNamespace>
     <LaunchProvider>Web launcher</LaunchProvider>
-    <CommandLineArguments>-m uvicorn fastapi_book_service:app --reload</CommandLineArguments>
+    <CommandLineArguments>-m uvicorn book:app --reload</CommandLineArguments>
     <WebBrowserPort>8080</WebBrowserPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

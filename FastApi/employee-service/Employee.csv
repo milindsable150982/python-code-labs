@@ -3,7 +3,7 @@
 3,Michael,Brown,789 Pine St,TX,54321,USA,Project Manager,85000
 4,Emily,Johnson,321 Maple St,FL,98765,USA,UX Designer,70000
 5,David,Williams,654 Cedar St,WA,13579,USA,System Administrator,72000
-6,Olivia,Jones,987 Birch St,IL,24680,USA,Marketing Specialist,68000
+6,John,Jones,987 Birch St,IL,24680,USA,Marketing Specialist,68000
 7,James,Miller,159 Spruce St,CO,11223,USA,Sales Manager,80000
 8,Isabella,Davis,753 Willow St,OR,33445,USA,HR Coordinator,67000
 9,William,Garcia,852 Aspen St,NV,55667,USA,Financial Analyst,73000
@@ -14,7 +14,8 @@
 14,Charlotte,Wilson,741 Elm St,MI,33333,USA,Operations Manager,82000
 15,Matthew,Anderson,852 Oak St,GA,44444,USA,Database Administrator,74000
 16,Amelia,Thomas,963 Pine St,VA,55555,USA,Digital Marketer,70000
-17,Joseph,Taylor,159 Maple St,SC,66666,USA,IT Support Specialist,68000
+17,John,Taylor,159 Maple St,SC,66666,USA,IT Support Specialist,68000
 18,Harper,Moore,753 Cedar St,MN,77777,USA,Business Analyst,75000
 19,Ethan,Jackson,852 Birch St,UT,88888,USA,Software Developer,77000
 20,Abigail,White,951 Spruce St,KS,99999,USA,Content Strategist,69000
+21,John,Doe,123 Main St,CA,12345,USA,Software Engineer,75000.0
