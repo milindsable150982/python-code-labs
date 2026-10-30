@@ -19,7 +19,8 @@ class EmployeeService:
                     zip=row[5],
                     country=row[6],
                     position=row[7],
-                    salary=row[8]
+                    salary=row[8],
+                    joiningDate=row[9]
                 ))
 
 
@@ -57,11 +58,12 @@ class EmployeeService:
                 employee.zip,
                 employee.country,
                 employee.position,
-                employee.salary
+                employee.salary,
+                employee.joiningDate
             ])
 
 
-    async def updateEmployee(self, id: int, updated_employee: Employee):
+    async def updateEmployee(self, updated_employee: Employee, id: int):
             for i, employee in enumerate(self.employees):
                 if employee.id == id:
                     self.employees[i] = updated_employee

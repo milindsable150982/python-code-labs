@@ -1,3 +1,4 @@
+from datetime import date
 from typing import Optional
 from pydantic import BaseModel, Field
 
@@ -11,6 +12,7 @@ class Employee(BaseModel):
     country: str = Field(..., min_length=1, max_length=50)
     position: str = Field(..., min_length=1, max_length=50)
     salary: float = Field(..., ge=0)
+    joiningDate: date = Field(..., description="The date the employee joined the company", ge=date(2012, 1, 1), le=date.today())
 
 
     model_config = {   
@@ -23,7 +25,8 @@ class Employee(BaseModel):
                 "zip": "12345",
                 "country": "USA",
                 "position": "Software Engineer",
-                "salary": 75000.00
+                "salary": 75000.00,
+                "joiningDate": "2022-01-01"
             }
            }
         }

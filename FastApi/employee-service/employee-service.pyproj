@@ -5,13 +5,15 @@
     <ProjectGuid>871b58ea-9e97-4dd3-b0da-d8667ba2982e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>employeeController.py</StartupFile>
-    <SearchPath>-m uvicorn employeeController:app --port 8080</SearchPath>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>employee-service</Name>
     <RootNamespace>employee-service</RootNamespace>
     <LaunchProvider>Web launcher</LaunchProvider>
     <WebBrowserPort>8080</WebBrowserPort>
+    <CommandLineArguments>-m uvicorn employeeController:app --port 8080</CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
