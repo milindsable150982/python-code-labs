@@ -14,6 +14,7 @@
     <LaunchProvider>Web launcher</LaunchProvider>
     <WebBrowserPort>8080</WebBrowserPort>
     <CommandLineArguments>-m uvicorn employeeController:app --port 8080</CommandLineArguments>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,12 +25,17 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Database.py" />
+    <Compile Include="DataAccess\employee.py" />
+    <Compile Include="DataAccess\main.py" />
+    <Compile Include="DataAccess\__init__.py" />
     <Compile Include="employeeController.py" />
     <Compile Include="Models\employee.py" />
     <Compile Include="Services\EmployeeServices.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="DataAccess\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
