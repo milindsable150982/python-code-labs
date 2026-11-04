@@ -6,6 +6,7 @@ app = FastAPI()
 
 employee.Base.metadata.create_all(bind=engine)
 
+
 async def getDatabase():
     db = SessionLocal()
     try:
