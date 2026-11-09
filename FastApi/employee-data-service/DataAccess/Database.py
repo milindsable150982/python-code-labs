@@ -14,3 +14,10 @@ SessionLocal = sessionmaker(
     autoflush=False,
     bind=engine,
 )
+
+async def getDatabase():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

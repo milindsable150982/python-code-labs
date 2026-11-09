@@ -1,26 +1,18 @@
-from fastapi import FastAPI, Depends, HTTPException, status
-import employee
-from Database import SessionLocal, engine
+from fastapi import APIRouter, Depends, HTTPException, status
+from DataAccess.employee import Employee
+from DataAccess.employee import EmployeeModel
+from DataAccess.Database import SessionLocal, getDatabase
 
-app = FastAPI()
+router = APIRouter()
 
-employee.Base.metadata.create_all(bind=engine)
-
-
-async def getDatabase():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
         
-@app.get("/employees/")
+@router.get("/employees/")
 async def GetEmployees(db: SessionLocal = Depends(getDatabase)):
-    return db.query(employee.Employee).all()
+    return db.query(Employee).all()
 
-@app.get("/employees/{id}")
+@router.get("/employees/{id}")
 async def GetEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
-     emp = db.query(employee.Employee).filter(employee.Employee.id == id).first()
+     emp = db.query(Employee).filter(Employee.id == id).first()
 
      if( emp is None):
          raise HTTPException(status_code=404, detail="Employee not found")
@@ -28,17 +20,17 @@ async def GetEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
      return emp
 
 
-@app.post("/employees/", status_code=status.HTTP_201_CREATED)
-async def CreateEmployee(employee_data: employee.EmployeeModel, db: SessionLocal = Depends(getDatabase)):
-    employeeData = employee.Employee(**employee_data.dict())
+@router.post("/employees/", status_code=status.HTTP_201_CREATED)
+async def CreateEmployee(employee_data: EmployeeModel, db: SessionLocal = Depends(getDatabase)):
+    employeeData = Employee(**employee_data.dict())
     db.add(employeeData)
     db.commit()
     db.refresh(employeeData)
 
 
-@app.put("/employees/{id}")
-async def UpdateEmployee(id: int, employee_data: employee.EmployeeModel, db: SessionLocal = Depends(getDatabase)):
-    emp = db.query(employee.Employee).filter(employee.Employee.id == id).first()
+@router.put("/employees/{id}")
+async def UpdateEmployee(id: int, employee_data: EmployeeModel, db: SessionLocal = Depends(getDatabase)):
+    emp = db.query(Employee).filter(Employee.id == id).first()
 
     if( emp is None):
         raise HTTPException(status_code=404, detail="Employee not found")
@@ -61,9 +53,9 @@ async def UpdateEmployee(id: int, employee_data: employee.EmployeeModel, db: Ses
     return emp
 
 
-@app.delete("/employees/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/employees/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def DeleteEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
-    emp = db.query(employee.Employee).filter(employee.Employee.id == id).first()
+    emp = db.query(Employee).filter(Employee.id == id).first()
     if( emp is None):
         raise HTTPException(status_code=404, detail="Employee not found")
     db.delete(emp)

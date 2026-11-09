@@ -1,4 +1,4 @@
-from Database import Base
+from DataAccess.Database import Base
 from sqlalchemy import Column, Integer, String, Boolean, Date, Float  # Add other types as needed
 from pydantic import BaseModel, Field
 from datetime import date

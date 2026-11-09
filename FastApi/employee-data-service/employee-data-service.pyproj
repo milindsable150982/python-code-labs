@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>23e2995e-0f25-4b3d-b6ab-3148e86faed1</ProjectGuid>
+    <ProjectGuid>{faa5d9f0-f563-7507-0d64-6146c424ce20}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>employee_data_service.py</StartupFile>
     <SearchPath>
@@ -21,7 +21,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controller\authController.py" />
+    <Compile Include="Controller\employeeController.py" />
+    <Compile Include="DataAccess\Database.py" />
+    <Compile Include="DataAccess\employee.py" />
+    <Compile Include="DataAccess\user.py" />
+    <Compile Include="DataAccess\__init__.py" />
     <Compile Include="employee_data_service.py" />
+    <Compile Include="main.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
+    <Folder Include="DataAccess\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataAccess\employee.db" />
+    <Content Include="employee-data-service.slnx" />
+    <Content Include="employee.db" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
