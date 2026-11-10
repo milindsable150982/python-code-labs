@@ -2,16 +2,18 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from DataAccess.employee import Employee
 from DataAccess.employee import EmployeeModel
 from DataAccess.Database import SessionLocal, getDatabase
+from Controller.authController import FetchToken
+from typing import Annotated
 
 router = APIRouter()
 
         
 @router.get("/employees/")
-async def GetEmployees(db: SessionLocal = Depends(getDatabase)):
+async def GetEmployees(authenticate: Annotated[None, Depends(FetchToken)], db: SessionLocal = Depends(getDatabase)):
     return db.query(Employee).all()
 
 @router.get("/employees/{id}")
-async def GetEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
+async def GetEmployee(id: int, authenticate: Annotated[None, Depends(FetchToken)], db: SessionLocal = Depends(getDatabase)):
      emp = db.query(Employee).filter(Employee.id == id).first()
 
      if( emp is None):
@@ -21,7 +23,7 @@ async def GetEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
 
 
 @router.post("/employees/", status_code=status.HTTP_201_CREATED)
-async def CreateEmployee(employee_data: EmployeeModel, db: SessionLocal = Depends(getDatabase)):
+async def CreateEmployee(employee_data: EmployeeModel, authenticate: Annotated[None, Depends(FetchToken)], db: SessionLocal = Depends(getDatabase)):
     employeeData = Employee(**employee_data.dict())
     db.add(employeeData)
     db.commit()
@@ -29,7 +31,7 @@ async def CreateEmployee(employee_data: EmployeeModel, db: SessionLocal = Depend
 
 
 @router.put("/employees/{id}")
-async def UpdateEmployee(id: int, employee_data: EmployeeModel, db: SessionLocal = Depends(getDatabase)):
+async def UpdateEmployee(id: int, employee_data: EmployeeModel, authenticate: Annotated[None, Depends(FetchToken)], db: SessionLocal = Depends(getDatabase)):
     emp = db.query(Employee).filter(Employee.id == id).first()
 
     if( emp is None):
@@ -54,7 +56,7 @@ async def UpdateEmployee(id: int, employee_data: EmployeeModel, db: SessionLocal
 
 
 @router.delete("/employees/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def DeleteEmployee(id: int, db: SessionLocal = Depends(getDatabase)):
+async def DeleteEmployee(id: int, authenticate: Annotated[None, Depends(FetchToken)], db: SessionLocal = Depends(getDatabase)):
     emp = db.query(Employee).filter(Employee.id == id).first()
     if( emp is None):
         raise HTTPException(status_code=404, detail="Employee not found")
