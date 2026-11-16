@@ -21,6 +21,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="alembic\env.py" />
+    <Compile Include="alembic\versions\ce58de7de5d1_create_phone_number_for_user_column.py" />
     <Compile Include="Controller\authController.py" />
     <Compile Include="Controller\employeeController.py" />
     <Compile Include="DataAccess\Database.py" />
@@ -31,10 +33,15 @@
     <Compile Include="main.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="alembic\" />
+    <Folder Include="alembic\versions\" />
+    <Folder Include="alembic\versions\__pycache__\" />
     <Folder Include="Controller\" />
     <Folder Include="DataAccess\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="alembic\README" />
+    <Content Include="alembic\script.py.mako" />
     <Content Include="DataAccess\employee.db" />
     <Content Include="employee-data-service.slnx" />
     <Content Include="employee.db" />
