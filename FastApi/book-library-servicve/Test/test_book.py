@@ -8,7 +8,7 @@ def test_getBooks_successfull(client, multiple_books):
    assert response.status_code == status.HTTP_200_OK
 
    books = response.json()['books']
-   assert len(books) >= 3  # At least the 3 books we created
+   assert len(books) >= len(multiple_books)  # At least the 3 books we created
 
    # Verify our multiple_books are in the list
    titles = [book['title'] for book in books]
@@ -73,7 +73,6 @@ def test_createBook_successful(client, sample_author):
    assert book['available_copies'] == book_data['available_copies']
 
 
-@pytest.mark.integration
 def test_createBook_missing_title(client, sample_author):
    """Test creating a book without title returns 400 (validation error)."""
    book_data = {
@@ -86,7 +85,6 @@ def test_createBook_missing_title(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_missing_author_id(client):
    """Test creating a book without author_id returns 400."""
    book_data = {
@@ -99,7 +97,6 @@ def test_createBook_missing_author_id(client):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_invalid_published_year_too_low(client, sample_author):
    """Test creating a book with published_year < 2000 returns 400."""
    book_data = {
@@ -113,7 +110,6 @@ def test_createBook_invalid_published_year_too_low(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_invalid_published_year_too_high(client, sample_author):
    """Test creating a book with published_year > 2025 returns 400."""
    book_data = {
@@ -127,7 +123,6 @@ def test_createBook_invalid_published_year_too_high(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_invalid_available_copies_negative(client, sample_author):
    """Test creating a book with negative available_copies returns 400."""
    book_data = {
@@ -141,7 +136,6 @@ def test_createBook_invalid_available_copies_negative(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_invalid_available_copies_exceeds_max(client, sample_author):
    """Test creating a book with available_copies > 50 returns 400."""
    book_data = {
@@ -155,7 +149,6 @@ def test_createBook_invalid_available_copies_exceeds_max(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_genre_too_short(client, sample_author):
    """Test creating a book with genre < 25 characters returns 400."""
    book_data = {
@@ -169,7 +162,6 @@ def test_createBook_genre_too_short(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_genre_too_long(client, sample_author):
    """Test creating a book with genre > 250 characters returns 400."""
    book_data = {
@@ -183,7 +175,6 @@ def test_createBook_genre_too_long(client, sample_author):
    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.integration
 def test_createBook_available_copies_boundary_zero(client, sample_author):
    """Test creating a book with available_copies = 0 (boundary) succeeds."""
    book_data = {
@@ -198,7 +189,6 @@ def test_createBook_available_copies_boundary_zero(client, sample_author):
    assert response.json()['book']['available_copies'] == 0
 
 
-@pytest.mark.integration
 def test_createBook_available_copies_boundary_fifty(client, sample_author):
    """Test creating a book with available_copies = 50 (boundary) succeeds."""
    book_data = {
@@ -213,7 +203,6 @@ def test_createBook_available_copies_boundary_fifty(client, sample_author):
    assert response.json()['book']['available_copies'] == 50
 
 
-@pytest.mark.integration
 def test_createBook_genre_min_length_boundary(client, sample_author):
    """Test creating a book with genre exactly 25 characters (boundary) succeeds."""
    book_data = {
@@ -227,7 +216,6 @@ def test_createBook_genre_min_length_boundary(client, sample_author):
    assert response.status_code == status.HTTP_200_OK
 
 
-@pytest.mark.integration
 def test_createBook_genre_max_length_boundary(client, sample_author):
    """Test creating a book with genre exactly 250 characters (boundary) succeeds."""
    book_data = {
@@ -241,7 +229,6 @@ def test_createBook_genre_max_length_boundary(client, sample_author):
    assert response.status_code == status.HTTP_200_OK
 
 
-@pytest.mark.integration
 def test_createBook_published_year_boundary_2000(client, sample_author):
    """Test creating a book with published_year = 2000 (boundary) succeeds."""
    book_data = {
@@ -256,7 +243,6 @@ def test_createBook_published_year_boundary_2000(client, sample_author):
    assert response.json()['book']['published_year'] == 2000
 
 
-@pytest.mark.integration
 def test_createBook_published_year_boundary_2025(client, sample_author):
    """Test creating a book with published_year = 2025 (boundary) succeeds."""
    book_data = {
@@ -274,7 +260,6 @@ def test_createBook_published_year_boundary_2025(client, sample_author):
 
 # region PUT Endpoint Tests
 
-@pytest.mark.integration
 def test_updateBook_successful(client, sample_book):
    """Test updating a book with valid data returns 200."""
    updated_data = {
@@ -296,7 +281,6 @@ def test_updateBook_successful(client, sample_book):
    assert book['available_copies'] == updated_data['available_copies']
 
 
-@pytest.mark.integration
 def test_updateBook_not_found(client, sample_book):
    """Test updating a non-existent book returns 404."""
    updated_data = {
@@ -313,7 +297,6 @@ def test_updateBook_not_found(client, sample_book):
 
 # region DELETE Endpoint Tests
 
-@pytest.mark.integration
 def test_deleteBook_successful(client, sample_book):
    """Test deleting a book succeeds."""
    book_id = sample_book.book_id
@@ -321,22 +304,20 @@ def test_deleteBook_successful(client, sample_book):
    # Delete the book
    response = client.delete(f"/books/{book_id}")
    # Accept any success or 404 status - behavior depends on implementation
-   assert response.status_code in [status.HTTP_200_OK, status.HTTP_204_NO_CONTENT, status.HTTP_404_NOT_FOUND]
+   assert response.status_code  == status.HTTP_200_OK
 
 
-@pytest.mark.integration
 def test_deleteBook_not_found(client, sample_book):
    """Test deleting a non-existent book returns 404."""
    response = client.delete(f"/books/{sample_book.book_id + 999}")
    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
-@pytest.mark.integration
 def test_deleteBook_invalid_id(client):
    """Test deleting with invalid ID format returns error."""
    response = client.delete("/books/invalid_id")
    # FastAPI will catch this and return a validation error
-   assert response.status_code in [status.HTTP_404_NOT_FOUND, status.HTTP_422_UNPROCESSABLE_ENTITY, status.HTTP_400_BAD_REQUEST]
+   assert response.status_code  == status.HTTP_400_BAD_REQUEST
 
 # endregion
 
