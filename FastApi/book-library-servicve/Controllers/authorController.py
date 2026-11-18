@@ -2,7 +2,6 @@ from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from DataAccess.config.database import get_db
 from DataAccess.authors.models import Author
 from DataAccess.authors.schema import AuthorSchema
-router = APIRouter()
 
 router = APIRouter(
     prefix="/authors",

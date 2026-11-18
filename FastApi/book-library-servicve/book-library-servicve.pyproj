@@ -26,20 +26,31 @@
     <Compile Include="Controllers\bookController.py" />
     <Compile Include="Controllers\borrowingController.py" />
     <Compile Include="Controllers\memberController.py" />
-    <Compile Include="Core\security.py" />
+    <Compile Include="Controllers\__init__.py" />
     <Compile Include="DataAccess\authors\models.py" />
     <Compile Include="DataAccess\authors\schema.py" />
+    <Compile Include="DataAccess\authors\__init__.py" />
     <Compile Include="DataAccess\books\models.py" />
     <Compile Include="DataAccess\books\schema.py" />
+    <Compile Include="DataAccess\books\__init__.py" />
     <Compile Include="DataAccess\borrowings\models.py" />
     <Compile Include="DataAccess\borrowings\schema.py" />
+    <Compile Include="DataAccess\borrowings\__init__.py" />
     <Compile Include="DataAccess\config\database.py" />
+    <Compile Include="DataAccess\config\__init__.py" />
     <Compile Include="DataAccess\members\models.py" />
     <Compile Include="DataAccess\members\schema.py" />
+    <Compile Include="DataAccess\members\__init__.py" />
+    <Compile Include="DataAccess\__init__.py" />
     <Compile Include="main.py" />
+    <Compile Include="Test\main_test.py" />
+    <Compile Include="Test\example_test.py" />
+    <Compile Include="Test\test_book.py" />
+    <Compile Include="Test\test_database.py" />
+    <Compile Include="Test\__init__.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\" />
+    <Folder Include="Test\" />
     <Folder Include="Controllers\" />
     <Folder Include="DataAccess\" />
     <Folder Include="DataAccess\members\" />
@@ -47,6 +58,13 @@
     <Folder Include="DataAccess\authors\" />
     <Folder Include="DataAccess\borrowings\" />
     <Folder Include="DataAccess\config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="COMPLETE_FIX_SUMMARY.md" />
+    <Content Include="DETAILED_CHANGES.md" />
+    <Content Include="FIX_REPORT.md" />
+    <Content Include="TEST_DATABASE_FIX.md" />
+    <Content Include="TEST_VALIDATION_REPORT.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Request
 from  DataAccess.config.database import Base, engine
 import Controllers.memberController
 import Controllers.bookController
@@ -17,6 +17,10 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         status_code=status.HTTP_400_BAD_REQUEST,
         content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
     )
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+def health_check():
+    return {"status": "healthy"}
 
 app.include_router(Controllers.memberController.router)
 app.include_router(Controllers.bookController.router)
