@@ -2,11 +2,12 @@ from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from DataAccess.config.database import get_db
 from DataAccess.authors.models import Author
 from DataAccess.authors.schema import AuthorSchema
+from authentication.auth_token import verify_token
 
 router = APIRouter(
     prefix="/authors",
     tags=["authors"],
-    #dependencies=[Depends(get_token_header)],
+     dependencies=[Depends(verify_token)],
      responses={404: {"description": "Not found"}, 
                401: {"description": "Unauthorized"}, 
                402: {"description": "Payment Required"},

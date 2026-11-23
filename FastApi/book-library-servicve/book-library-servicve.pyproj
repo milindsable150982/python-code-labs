@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>book-library-servicve</Name>
     <RootNamespace>book-library-servicve</RootNamespace>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="authentication\auth_token.py" />
     <Compile Include="book_library_servicve.py" />
+    <Compile Include="config.py" />
     <Compile Include="Controllers\authorController.py" />
     <Compile Include="Controllers\bookController.py" />
     <Compile Include="Controllers\borrowingController.py" />
@@ -46,10 +49,10 @@
     <Compile Include="Test\main_test.py" />
     <Compile Include="Test\example_test.py" />
     <Compile Include="Test\test_book.py" />
-    <Compile Include="Test\test_database.py" />
     <Compile Include="Test\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="authentication\" />
     <Folder Include="Test\" />
     <Folder Include="Controllers\" />
     <Folder Include="DataAccess\" />
@@ -60,11 +63,7 @@
     <Folder Include="DataAccess\config\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="COMPLETE_FIX_SUMMARY.md" />
-    <Content Include="DETAILED_CHANGES.md" />
-    <Content Include="FIX_REPORT.md" />
-    <Content Include="TEST_DATABASE_FIX.md" />
-    <Content Include="TEST_VALIDATION_REPORT.md" />
+    <Content Include="dev.env" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from DataAccess.borrowings.schema import BorrowingSchema
 from DataAccess.config.database import get_db
@@ -8,13 +6,14 @@ from DataAccess.books.models import Book
 from DataAccess.config.database import SessionLocal, engine
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date
+from authentication.auth_token import verify_token
 
 route = APIRouter()
 
 router = APIRouter(
     prefix="/borrowings",
     tags=["borrowings"],
-    #dependencies=[Depends(get_token_header)],
+    dependencies=[Depends(verify_token)],
      responses={404: {"description": "Not found"}, 
                401: {"description": "Unauthorized"}, 
                402: {"description": "Payment Required"},

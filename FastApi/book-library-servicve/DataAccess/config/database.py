@@ -1,12 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+from config import get_connection_settings
 
-Database_Url = (
-    "mssql+pyodbc://@(localdb)\MSSQLLocalDB/LibraryDatabase"
-    "?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
-)
+settings = get_connection_settings()
 
-engine = create_engine(Database_Url, connect_args={"check_same_thread": False})
+engine = create_engine(str(settings.DatabaseUrl), connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
