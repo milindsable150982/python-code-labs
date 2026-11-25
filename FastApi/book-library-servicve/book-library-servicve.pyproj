@@ -4,7 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3a3abc36-2eb3-4f25-a8d6-8ed3bef2f2bc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>book_library_servicve.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,7 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="authentication\auth_token.py" />
-    <Compile Include="book_library_servicve.py" />
     <Compile Include="config.py" />
     <Compile Include="Controllers\authorController.py" />
     <Compile Include="Controllers\bookController.py" />
@@ -46,9 +46,12 @@
     <Compile Include="DataAccess\members\__init__.py" />
     <Compile Include="DataAccess\__init__.py" />
     <Compile Include="main.py" />
+    <Compile Include="Test\conftest.py" />
     <Compile Include="Test\main_test.py" />
     <Compile Include="Test\example_test.py" />
-    <Compile Include="Test\test_book.py" />
+    <Compile Include="Test\controller\test_member_controller.py" />
+    <Compile Include="Test\controller\test_author_controller.py" />
+    <Compile Include="Test\controller\test_book_controller.py" />
     <Compile Include="Test\__init__.py" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +64,7 @@
     <Folder Include="DataAccess\authors\" />
     <Folder Include="DataAccess\borrowings\" />
     <Folder Include="DataAccess\config\" />
+    <Folder Include="Test\controller\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="dev.env" />

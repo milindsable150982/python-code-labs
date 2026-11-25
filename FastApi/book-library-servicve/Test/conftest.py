@@ -10,6 +10,7 @@ from DataAccess.authors.models import Author
 from datetime import date  # ← Add this import
 from DataAccess.members.models import Member
 from DataAccess.borrowings.models import Borrowing
+from authentication.auth_token import verify_token
 
 # Test Database Setup
 TEST_DATABASE_URL = "sqlite:///./test.db"
@@ -32,9 +33,13 @@ def override_get_db():
     finally:
         db.close()
 
+def override_verify_token():
+    """Override the verify_token dependency for testing."""
+    return True  # Always return True for testing purposes
 
 # Override dependency before app starts
 app.dependency_overrides[get_db] = override_get_db
+app.dependency_overrides[verify_token] = override_verify_token
 
 @pytest.fixture
 def db():
@@ -136,9 +141,8 @@ def multiple_books(db, sample_author):
         db.refresh(book)
     return books
 
-
 @pytest.fixture
-def multiple_members(db, sample_author):
+def multiple_members(db):
     """Create multiple sample members for testing."""
     members = [
         Member(first_name="John", last_name="Doe", email="john.doe@example.com", join_date=date(2023, 1, 1)),
@@ -150,3 +154,18 @@ def multiple_members(db, sample_author):
     for member in members:
         db.refresh(member)
     return members
+
+
+@pytest.fixture
+def multiple_authors(db):
+    """Create multiple sample authors for testing."""
+    authors = [
+        Author(first_name="John", last_name="Doe", birth_year=1980),
+        Author(first_name="Jane", last_name="Smith", birth_year=1985),
+        Author(first_name="Bob", last_name="Johnson", birth_year=1990),
+    ]
+    db.add_all(authors)
+    db.commit()
+    for author in authors:
+        db.refresh(author)
+    return authors

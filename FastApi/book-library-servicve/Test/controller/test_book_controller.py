@@ -8,7 +8,7 @@ def test_getBooks_successfull(client, multiple_books):
    assert response.status_code == status.HTTP_200_OK
 
    books = response.json()['books']
-   assert len(books) >= len(multiple_books)  # At least the 3 books we created
+   assert len(books) == len(multiple_books)  # Exactly the 3 books we created
 
    # Verify our multiple_books are in the list
    titles = [book['title'] for book in books]
